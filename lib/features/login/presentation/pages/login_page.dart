@@ -55,11 +55,11 @@ class LoginPage extends GetView<LoginController> {
                                   padding: EdgeInsets.symmetric(
                                       vertical: 15.sp, horizontal: 15.sp),
                                   decoration: BoxDecoration(
-                                      color: Color(0xff30313C),
+                                      color: Color(0xFF2E2E2E),
                                       borderRadius:
                                           BorderRadius.circular(15.sp)),
                                   child: Center(
-                                      child: Text("Login",
+                                      child: Text("LOGIN",
                                           style: TextStyle(
                                               color: Colors.white))))),
                         )
@@ -71,15 +71,18 @@ class LoginPage extends GetView<LoginController> {
                   CircleAvatar(radius: 35.sp, backgroundColor: Colors.white10)),
           Positioned(
             top: 10.h,
-            left: 40.w,
+            left: 30.w,
+            right: 30.w,
             child: Container(
                 padding:
-                    EdgeInsets.symmetric(vertical: 10.sp, horizontal: 15.sp),
+                    EdgeInsets.symmetric(vertical: 5.sp, horizontal: 20.sp),
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(10.sp)),
-                child: Text("LOGIN",
-                    style: TextStyle(color: Colors.white, fontSize: 18.sp))),
+                child: Center(
+                  child: Text("LOGIN",
+                      style: TextStyle(color: Colors.white, fontSize: 20.sp)),
+                )),
           ),
         ],
       ),

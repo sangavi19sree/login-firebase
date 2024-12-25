@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login_firebase/features/plugin/presentation/controller/plugin_controller.dart';
+import 'package:login_firebase/features/plugin/presentation/widgets/qr_number_card.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PluginPage extends GetView<PluginController> {
@@ -18,12 +19,13 @@ class PluginPage extends GetView<PluginController> {
               child: Padding(
                   padding: EdgeInsets.only(top: 12.h),
                   child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20.sp),
-                              topLeft: Radius.circular(20.sp))),
-                      child: Column(spacing: 3.h, children: [])))),
+                    child: QrNumberCard(),
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20.sp),
+                            topLeft: Radius.circular(20.sp))),
+                  ))),
           Positioned(
               top: -6.h,
               right: -2.w,
@@ -37,16 +39,57 @@ class PluginPage extends GetView<PluginController> {
                   ))),
           Positioned(
             top: 10.h,
-            left: 40.w,
+            left: 30.w,
+            right: 30.w,
             child: Container(
                 padding:
-                    EdgeInsets.symmetric(vertical: 10.sp, horizontal: 15.sp),
+                    EdgeInsets.symmetric(vertical: 5.sp, horizontal: 20.sp),
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(10.sp)),
-                child: Text("LOGIN",
-                    style: TextStyle(color: Colors.white, fontSize: 18.sp))),
+                child: Center(
+                  child: Text("PLUGIN",
+                      style: TextStyle(color: Colors.white, fontSize: 20.sp)),
+                )),
           ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(
+                          vertical: 15.sp, horizontal: 15.sp),
+                      decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(15.sp)),
+                      child: Center(
+                          child: Text("Last Login at Today",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 16.sp)))),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 16),
+                  child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15.sp, horizontal: 15.sp),
+                          decoration: BoxDecoration(
+                              color: Color(0xFF2E2E2E),
+                              borderRadius: BorderRadius.circular(15.sp)),
+                          child: Center(
+                              child: Text("SAVE",
+                                  style: TextStyle(color: Colors.white))))),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
