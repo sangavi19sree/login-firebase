@@ -35,6 +35,19 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
+  # network calls
+  dio:
+  pretty_dio_logger:
+  retrofit:
+  logger:
+  json_annotation:
+
+  #state management
+  get:
+
+  # responsive screen
+  responsive_sizer:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
