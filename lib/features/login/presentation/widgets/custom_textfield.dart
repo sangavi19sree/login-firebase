@@ -42,7 +42,7 @@ class CustomTextfield extends StatelessWidget {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.sp)),
+                    borderRadius: BorderRadius.circular(15.sp)),
                 contentPadding: EdgeInsets.symmetric(
                     vertical: (minLines ?? 0) > 1 ? 20 : 15, horizontal: 12),
                 fillColor: Color(0xFF35215F),
