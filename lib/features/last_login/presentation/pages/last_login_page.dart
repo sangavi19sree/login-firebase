@@ -35,15 +35,18 @@ class LastLoginPage extends StatelessWidget {
                   ))),
           Positioned(
             top: 10.h,
-            left: 40.w,
+            left: 30.w,
+            right: 30.w,
             child: Container(
                 padding:
                     EdgeInsets.symmetric(vertical: 10.sp, horizontal: 15.sp),
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(10.sp)),
-                child: Text("LOGIN",
-                    style: TextStyle(color: Colors.white, fontSize: 18.sp))),
+                child: Center(
+                  child: Text("LAST LOGIN",
+                      style: TextStyle(color: Colors.white, fontSize: 18.sp)),
+                )),
           ),
         ],
       ),

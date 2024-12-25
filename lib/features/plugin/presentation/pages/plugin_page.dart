@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login_firebase/features/plugin/presentation/controller/plugin_controller.dart';
 import 'package:login_firebase/features/plugin/presentation/widgets/qr_number_card.dart';
+import 'package:login_firebase/shared/app_routes.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PluginPage extends GetView<PluginController> {
@@ -75,7 +76,9 @@ class PluginPage extends GetView<PluginController> {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 16),
                   child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(AppRoute.lastLogin);
+                      },
                       child: Container(
                           width: double.infinity,
                           padding: EdgeInsets.symmetric(
