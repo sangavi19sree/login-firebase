@@ -135,7 +135,10 @@ class LastLoginPage extends GetView<LastLoginController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    "Time: ${DateFormat('dd-MMM-yyyy').format(DateTime.parse(data['last_login_time']))}",
+                                    "Date: ${DateFormat('dd-MMM-yyyy ').format(DateTime.parse(data['last_login_time']))}",
+                                    style: TextStyle(color: Colors.white)),
+                                Text(
+                                    "Time: ${DateFormat('hh:mm:ssa').format(DateTime.parse(data['last_login_time']))}",
                                     style: TextStyle(color: Colors.white)),
                                 Text("Number: ${data['qr_number']}",
                                     style: TextStyle(color: Colors.white)),
