@@ -11,12 +11,14 @@ class CustomTextfield extends StatelessWidget {
   final int? minLines;
   final int? maxLength;
   final int? maxLines;
+  final TextEditingController controller;
   final Function(String)? onSubmit;
   final Function(String)? onChanged;
   final TextInputAction? textInputAction;
 
   CustomTextfield(
       {super.key,
+      required this.controller,
       required this.label,
       this.validator,
       this.hintText,
@@ -32,13 +34,14 @@ class CustomTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label, style: TextStyle(color: Colors.white, fontSize: 17.sp)),
           SizedBox(height: 1.h),
           TextFormField(
+            controller: controller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: InputDecoration(
                 border: OutlineInputBorder(

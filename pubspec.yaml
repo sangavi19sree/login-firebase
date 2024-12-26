@@ -48,6 +48,8 @@ dependencies:
 
   # responsive screen
   responsive_sizer:
+  firebase_core:
+  firebase_auth:
 
 dev_dependencies:
   flutter_test:

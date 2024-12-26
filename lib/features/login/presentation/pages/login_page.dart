@@ -26,17 +26,38 @@ class LoginPage extends GetView<LoginController> {
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(20.sp),
                               topLeft: Radius.circular(20.sp))),
-                      child: Column(spacing: 3.h, children: [
+                      child: Column(spacing: 1.h, children: [
                         SizedBox(height: 20.h),
                         CustomTextfield(
                             label: "Phone Number",
+                            controller: controller.mobileNumber,
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly
                             ]),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: InkWell(
+                              onTap: () {
+                                controller.sendOTP();
+                              },
+                              child: Container(
+                                  width: 20.w,
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 10.sp, horizontal: 10.sp),
+                                  decoration: BoxDecoration(
+                                      color: Color(0xFF2E2E2E),
+                                      borderRadius:
+                                          BorderRadius.circular(15.sp)),
+                                  child: Center(
+                                      child: Text("Send OTP",
+                                          style: TextStyle(
+                                              color: Colors.white))))),
+                        ),
                         CustomTextfield(
                           label: "OTP",
+                          controller: controller.otp,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.phone,
                           inputFormatters: [
