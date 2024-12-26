@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:login_firebase/features/last_login/presentation/controller/last_login_controller.dart';
 import 'package:login_firebase/shared/app_assets.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -19,7 +21,9 @@ class LastLoginPage extends GetView<LastLoginController> {
                   height: 8.h,
                   width: 80.w,
                   decoration: BoxDecoration(
-                      color: Color(0xFF2E2E2E),
+                      color: controller.test.value == true
+                          ? Color(0xFF2E2E2E)
+                          : Color(0xFF2E2E2E),
                       borderRadius: BorderRadius.circular(15.sp)),
                   child: Center(
                       child: Text("SAVE",
@@ -95,37 +99,68 @@ class LastLoginPage extends GetView<LastLoginController> {
   }
 
   Widget todayLogin() {
-    return Padding(
-        padding: EdgeInsets.only(top: 3.h),
-        child: Stack(children: [
-          Positioned(
-              top: 1.h,
-              child: Column(spacing: 4.h, children: [
-                Container(
-                    width: 100.w,
+    return FutureBuilder<QuerySnapshot>(
+      future: controller.getLastLoginData(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return Center(child: Text('No Login Data available'));
+        }
+        // snapshot.data?.docs.forEach((element) {
+        //   print(element.data());
+        // });
+        final documents = snapshot.data!.docs;
+
+        return ListView.builder(
+            itemCount: documents.length,
+            itemBuilder: (context, index) {
+              final data = documents[index].data() as Map<String, dynamic>;
+
+              return Column(
+                children: [
+                  Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.sp),
-                        color: Color(0xFF2E2E2E)),
-                    padding: EdgeInsets.all(15.sp),
-                    child: Column(
+                        borderRadius: BorderRadius.circular(15.sp),
+                        color: Colors.white24),
+                    padding: EdgeInsets.all(10.sp),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("2.55PM", style: TextStyle(color: Colors.white)),
-                          Text("IP: 123.123.133",
-                              style: TextStyle(color: Colors.white)),
-                          Text("Chennai", style: TextStyle(color: Colors.white))
-                        ]))
-              ])),
-          Positioned(
-              right: 0.w,
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white54,
-                      borderRadius: BorderRadius.circular(15.sp)),
-                  width: 40.sp,
-                  height: 40.sp,
-                  child:
-                      SvgPicture.asset(AppAssets.qrImage, fit: BoxFit.cover))),
-        ]));
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                    "Time: ${DateFormat('dd-MMM-yyyy').format(DateTime.parse(data['last_login_time']))}",
+                                    style: TextStyle(color: Colors.white)),
+                                Text("Number: ${data['qr_number']}",
+                                    style: TextStyle(color: Colors.white)),
+                                Text('Chennai',
+                                    style: TextStyle(color: Colors.white)),
+                              ],
+                            ),
+                          ),
+                          Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white54,
+                                  borderRadius: BorderRadius.circular(15.sp)),
+                              width: 40.sp,
+                              height: 40.sp,
+                              child: SvgPicture.asset(AppAssets.qrImage,
+                                  fit: BoxFit.cover)),
+                        ]),
+                  ),
+                  SizedBox(
+                    height: 10.sp,
+                  )
+                ],
+              );
+            });
+      },
+    );
   }
 }

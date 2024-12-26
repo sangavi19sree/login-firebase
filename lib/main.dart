@@ -9,7 +9,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  LoginBinding().dependencies();
+  await LoginBinding().dependencies();
 
   runApp(const MyApp());
 }

@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginBinding extends Bindings {
   @override
-  void dependencies() async {
-    Get.putAsync<SharedPrefManager>(() async {
+  Future<void> dependencies() async {
+    await Get.putAsync<SharedPrefManager>(() async {
       final SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
 
