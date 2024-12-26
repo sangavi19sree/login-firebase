@@ -50,7 +50,9 @@ dependencies:
   responsive_sizer:
   firebase_core:
   firebase_auth:
-  qr_flutter: 
+  shared_preferences:
+  qr_flutter:
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:

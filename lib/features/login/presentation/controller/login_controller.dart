@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:login_firebase/core/shared_pref_manager.dart';
 import 'package:login_firebase/shared/app_routes.dart';
 
 class LoginController extends GetxController {
-  LoginController();
+  final SharedPrefManager sharedPrefManager;
+  LoginController(this.sharedPrefManager);
 
   TextEditingController mobileNumber = TextEditingController();
   TextEditingController otp = TextEditingController();
@@ -23,8 +25,9 @@ class LoginController extends GetxController {
   // }
 
   void login() {
-    if (mobileNumber.text.length == 10) {
+    if (mobileNumber.text.length == 10 && mobileNumber.text == "8072616729") {
       if (otp.text == "1234") {
+        sharedPrefManager.setMobileNumber(mobileNumber.text);
         Get.toNamed(AppRoute.plugin);
       }
     }

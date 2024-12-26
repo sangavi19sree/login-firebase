@@ -10,6 +10,16 @@ class PluginPage extends GetView<PluginController> {
 
   @override
   Widget build(BuildContext context) {
+    String generateRandomNumber() {
+      return (10000 +
+              (100000 *
+                  (new DateTime.now().millisecondsSinceEpoch % 1000) /
+                  1000))
+          .toStringAsFixed(0);
+    }
+
+    String qrCodeData = "https://example.com";
+
     return Scaffold(
       body: Stack(
         children: [
@@ -20,7 +30,8 @@ class PluginPage extends GetView<PluginController> {
               child: Padding(
                   padding: EdgeInsets.only(top: 12.h),
                   child: Container(
-                    child: QrNumberCard(),
+                    child:
+                        QrNumberCard(generatedNumber: generateRandomNumber()),
                     decoration: BoxDecoration(
                         color: Colors.black,
                         borderRadius: BorderRadius.only(
@@ -30,14 +41,18 @@ class PluginPage extends GetView<PluginController> {
           Positioned(
               top: -6.h,
               right: -2.w,
-              child: CircleAvatar(
-                  radius: 35.sp,
-                  backgroundColor: Colors.white10,
-                  child: Container(
-                    padding: EdgeInsets.only(top: 30.sp),
-                    child: Text("Logout",
-                        style: TextStyle(color: Colors.white, fontSize: 17.sp)),
-                  ))),
+              child: InkWell(
+                onTap: controller.logout,
+                child: CircleAvatar(
+                    radius: 35.sp,
+                    backgroundColor: Colors.white10,
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30.sp),
+                      child: Text("Logout",
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 17.sp)),
+                    )),
+              )),
           Positioned(
             top: 10.h,
             left: 30.w,
@@ -60,24 +75,28 @@ class PluginPage extends GetView<PluginController> {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.symmetric(
-                          vertical: 15.sp, horizontal: 15.sp),
-                      decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(15.sp)),
-                      child: Center(
-                          child: Text("Last Login at Today",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 16.sp)))),
+                  child: InkWell(
+                    onTap: () => Get.toNamed(AppRoute.lastLogin),
+                    child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(
+                            vertical: 15.sp, horizontal: 15.sp),
+                        decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(15.sp)),
+                        child: Center(
+                            child: Text("Last Login at Today",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16.sp)))),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 16),
                   child: InkWell(
                       onTap: () {
-                        Get.toNamed(AppRoute.lastLogin);
+                        String qrNumber = generateRandomNumber();
+                        controller.saveQRCode(qrNumber, qrCodeData);
                       },
                       child: Container(
                           width: double.infinity,

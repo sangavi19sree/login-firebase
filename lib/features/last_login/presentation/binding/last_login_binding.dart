@@ -5,7 +5,7 @@ class LastLoginBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<LastLoginController>(
-      () => LastLoginController(),
+      () => LastLoginController(Get.find()),
     );
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:login_firebase/features/last_login/presentation/controller/last_login_controller.dart';
 import 'package:login_firebase/shared/app_assets.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class LastLoginPage extends StatelessWidget {
+class LastLoginPage extends GetView<LastLoginController> {
   const LastLoginPage({super.key});
 
   @override
@@ -56,21 +58,25 @@ class LastLoginPage extends StatelessWidget {
                                 Expanded(
                                     child: TabBarView(children: [
                                   todayLogin(),
-                                  todayLogin(),
-                                  todayLogin(),
+                                  Container(),
+                                  Container()
                                 ]))
                               ])))))),
           Positioned(
               top: -6.h,
               right: -2.w,
-              child: CircleAvatar(
-                  radius: 35.sp,
-                  backgroundColor: Colors.white10,
-                  child: Container(
-                    padding: EdgeInsets.only(top: 30.sp),
-                    child: Text("Logout",
-                        style: TextStyle(color: Colors.white, fontSize: 17.sp)),
-                  ))),
+              child: InkWell(
+                onTap: () => controller.logout,
+                child: CircleAvatar(
+                    radius: 35.sp,
+                    backgroundColor: Colors.white10,
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30.sp),
+                      child: Text("Logout",
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 17.sp)),
+                    )),
+              )),
           Positioned(
               top: 10.h,
               left: 30.w,

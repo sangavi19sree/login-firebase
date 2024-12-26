@@ -4,8 +4,6 @@ import 'package:login_firebase/features/plugin/presentation/controller/plugin_co
 class PluginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<PluginController>(
-      () => PluginController(),
-    );
+    Get.lazyPut<PluginController>(() => PluginController(Get.find()));
   }
 }

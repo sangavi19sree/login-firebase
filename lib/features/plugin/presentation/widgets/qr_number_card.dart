@@ -1,13 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class QrNumberCard extends StatelessWidget {
-  QrNumberCard({super.key});
+  final String generatedNumber;
 
-  final String generatedNumber = (Random().nextInt(90000) + 10000).toString();
+  QrNumberCard({super.key, required this.generatedNumber});
 
   @override
   Widget build(BuildContext context) {
