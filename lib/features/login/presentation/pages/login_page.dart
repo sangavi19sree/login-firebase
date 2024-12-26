@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:login_firebase/features/login/presentation/controller/login_controller.dart';
 import 'package:login_firebase/features/login/presentation/widgets/custom_textfield.dart';
-import 'package:login_firebase/shared/app_routes.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LoginPage extends GetView<LoginController> {
@@ -26,65 +25,50 @@ class LoginPage extends GetView<LoginController> {
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(20.sp),
                               topLeft: Radius.circular(20.sp))),
-                      child: Column(spacing: 1.h, children: [
-                        SizedBox(height: 20.h),
-                        CustomTextfield(
-                            label: "Phone Number",
-                            controller: controller.mobileNumber,
+                      child: SingleChildScrollView(
+                        child: Column(spacing: 1.h, children: [
+                          SizedBox(height: 20.h),
+                          CustomTextfield(
+                              label: "Phone Number",
+                              controller: controller.mobileNumber,
+                              textInputAction: TextInputAction.next,
+                              keyboardType: TextInputType.number,
+                              maxLength: 10,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ]),
+                          CustomTextfield(
+                            label: "OTP",
+                            maxLength: 4,
+                            controller: controller.otp,
                             textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.phone,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly
-                            ]),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: InkWell(
-                              onTap: () {
-                                controller.sendOTP();
-                              },
-                              child: Container(
-                                  width: 20.w,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 10.sp, horizontal: 10.sp),
-                                  decoration: BoxDecoration(
-                                      color: Color(0xFF2E2E2E),
-                                      borderRadius:
-                                          BorderRadius.circular(15.sp)),
-                                  child: Center(
-                                      child: Text("Send OTP",
-                                          style: TextStyle(
-                                              color: Colors.white))))),
-                        ),
-                        CustomTextfield(
-                          label: "OTP",
-                          controller: controller.otp,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.phone,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 5.h, horizontal: 16),
-                          child: InkWell(
-                              onTap: () {
-                                Get.toNamed(AppRoute.plugin);
-                              },
-                              child: Container(
-                                  width: double.infinity,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15.sp, horizontal: 15.sp),
-                                  decoration: BoxDecoration(
-                                      color: Color(0xFF2E2E2E),
-                                      borderRadius:
-                                          BorderRadius.circular(15.sp)),
-                                  child: Center(
-                                      child: Text("LOGIN",
-                                          style: TextStyle(
-                                              color: Colors.white))))),
-                        )
-                      ])))),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5.h, horizontal: 16),
+                            child: InkWell(
+                                onTap: () {
+                                  controller.login();
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 15.sp, horizontal: 15.sp),
+                                    decoration: BoxDecoration(
+                                        color: Color(0xFF2E2E2E),
+                                        borderRadius:
+                                            BorderRadius.circular(15.sp)),
+                                    child: Center(
+                                        child: Text("LOGIN",
+                                            style: TextStyle(
+                                                color: Colors.white))))),
+                          )
+                        ]),
+                      )))),
           Positioned(
               top: -6.h,
               right: -2.w,
