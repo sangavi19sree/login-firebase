@@ -1,8 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class QrNumberCard extends StatelessWidget {
-  const QrNumberCard({super.key});
+  QrNumberCard({super.key});
+
+  final String generatedNumber = (Random().nextInt(90000) + 10000).toString();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class QrNumberCard extends StatelessWidget {
               children: [
                 Text("Generated Number",
                     style: TextStyle(color: Colors.white, fontSize: 20.sp)),
-                Text("12313",
+                Text(generatedNumber,
                     style: TextStyle(color: Colors.white, fontSize: 24.sp)),
                 SizedBox(height: 1.h)
               ],
@@ -51,7 +56,11 @@ class QrNumberCard extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.grey,
                   borderRadius: BorderRadius.circular(15.sp)),
-              child: Text("")),
+              child: Center(
+                  child: QrImageView(
+                      data: generatedNumber,
+                      version: QrVersions.auto,
+                      size: 53.sp))),
         ),
       ],
     );
